@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="row text-center">
+        <h1>Homemade &amp; cheap Sema IoT platform</h1>
+    </div>
+
+    <div class="row padding-top-12">
+        <div class="well well-sm">
+            Last sensor value read: {{ timestamp | date:'d/M/y (HH:mm:ss)' }}
+        </div>
+    </div>
+
+    <!-- Request Action Buttons -->
+    <div class="row padding-top-12">
+        <div class="col-xs-4">
+            <button class="btn btn-primary full-width" (click)="startStreamingWithHttpModified()">Http proposed (PR)</button>
+        </div>
+        <div class="col-xs-4">
+            <button class="btn btn-primary full-width" (click)="startStreamingWithFetch()">Fetch</button>
+        </div>
+        <div class="col-xs-4">
+            <button class="btn btn-primary full-width" (click)="stopStreaming()">Stop Streaming (Exp.)</button>
+        </div>
+    </div>
+
+    <div class="row padding-top-28">
+        <div class="col-xs-12 col-sm-4">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Light sensor (Lux)</h3>
+            </div>
+            <div class="panel-body text-center">
+                <span class="sensor-font-size">{{ dashboard?.light }}</span>
+            </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Temperature sensor (ºC)</h3>
+            </div>
+            <div class="panel-body text-center">
+                <span class="sensor-font-size">{{ dashboard?.temperature }}</span>
+            </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Gas sensor (OK/KO)  </h3>
+            </div>
+            <div class="panel-body text-center" 
+                    [style.background-color]="(dashboard?.gas || dashboard?.gas === '-') ? 'white' : 'darkred'"
+                    [style.color]="(dashboard?.gas === 'OK' || dashboard?.gas === '-') ? 'black' : '#9acd32'">
+                <span class="sensor-font-size">{{ dashboard?.gas | gasPresence }}</span>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Support information -->
+    <div class="row">
+        <div class="col-xs-6 text-center padding-top-12">
+            <h4>ServerSideEvents (EventStream)</h4>
+            <div *ngIf="sseSupported; then sseIsSupported else sseIsNotSupported"></div>
+            <ng-template #sseIsSupported>
+                <p style="color: green"><em>Your browser has SSE support!! :-)</em></p>
+            </ng-template>
+            <ng-template #sseIsNotSupported>
+                <p style="color: darkred"><em>Your browser don't have SSE support!! :-(</em></p>
+            </ng-template>
+        </div>
+        <div class="col-xs-6 text-center padding-top-12">
+            <h4>Fetch (new native HTTP API)</h4>
+            <div *ngIf="fetchSupported; then fetchIsSupported else fetchIsNotSupported"></div>
+            <ng-template #fetchIsSupported>
+                <p style="color: green"><em>Your browser has fetch support!! :-)</em></p>
+            </ng-template>
+            <ng-template #fetchIsNotSupported>
+                <p style="color: darkred"><em>Your browser don't have fetch support!! :-(</em></p>
+            </ng-template>
+        </div>
+    </div>
+</div>

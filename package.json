@@ -1,0 +1,25 @@
+{
+  "name": "angular-http-streaming",
+  "version": "1.0.0",
+  "description": "Example of Angular app to demostrate the use of HTTP streaming chunks",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently 'npm run client' 'npm run server'",
+    "client": "cd client && npm run ng-proxied",
+    "server": "cd server && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/semagarcia/angular-http-streaming.git"
+  },
+  "author": "Sema",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/semagarcia/angular-http-streaming/issues"
+  },
+  "homepage": "https://github.com/semagarcia/angular-http-streaming#readme",
+  "devDependencies": {
+    "concurrently": "^3.4.0"
+  }
+}
